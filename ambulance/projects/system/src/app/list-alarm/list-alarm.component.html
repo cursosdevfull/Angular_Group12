@@ -1,0 +1,16 @@
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th>Day of week</th>
+      <th>Hours</th>
+      <th>Minutes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let alarm of listAlarms">
+      <td>{{ alarm.dayOfWeek }}</td>
+      <td>{{ alarm.hours }}</td>
+      <td>{{ alarm.minutes }}</td>
+    </tr>
+  </tbody>
+</table>

@@ -22,9 +22,7 @@
               "projects/system/src/favicon.ico",
               "projects/system/src/assets"
             ],
-            "styles": [
-              "projects/system/src/styles.css"
-            ],
+            "styles": ["projects/system/src/styles.css"],
             "scripts": []
           },
           "configurations": {
@@ -89,9 +87,7 @@
               "projects/system/src/favicon.ico",
               "projects/system/src/assets"
             ],
-            "styles": [
-              "projects/system/src/styles.css"
-            ],
+            "styles": ["projects/system/src/styles.css"],
             "scripts": []
           }
         }

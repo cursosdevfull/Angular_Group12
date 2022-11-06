@@ -1,1 +1,30 @@
-<p>user {{ name }}</p>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        {{ name }}
+      </td>
+      <td>
+        {{ age }}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <button class="btn btn-primary" (click)="sentInfo()">Sent info</button>
+        <button class="btn btn-success" (click)="showInfo()">Show info</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- <script>
+  const btn = document.querySelector("button");
+  btn.addEventListener("click", () => {
+    alert(`Name: ${name}, Age: ${age}`);
+  });
+</script> -->
