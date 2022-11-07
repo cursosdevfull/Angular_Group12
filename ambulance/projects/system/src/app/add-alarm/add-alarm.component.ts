@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { v4 as uuidv4 } from 'uuid';
 
 import { Alarm } from '../classes/alarm';
+import { AlarmFactory } from '../classes/alarm-factory';
 
 @Component({
   selector: 'amb-add-alarm',
@@ -32,8 +34,22 @@ export class AddAlarmComponent implements OnInit {
 
   addUser() {
     if (this.dayOfWeek && this.hours && this.minutes) {
-      const alarm: Alarm = new Alarm(this.dayOfWeek, this.hours, this.minutes);
-      this.onAddAlarm.emit(alarm);
+      const properties = {
+        id: uuidv4(),
+        dayOfWeek: this.dayOfWeek,
+        hours: this.hours,
+        minutes: this.minutes,
+      };
+
+      const alarm: Alarm | null = new AlarmFactory().create(
+        properties.id,
+        properties.dayOfWeek,
+        properties.hours,
+        properties.minutes
+      );
+      if (alarm) {
+        this.onAddAlarm.emit(alarm);
+      }
     }
   }
 }

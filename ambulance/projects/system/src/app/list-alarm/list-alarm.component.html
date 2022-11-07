@@ -8,9 +8,9 @@
   </thead>
   <tbody>
     <tr *ngFor="let alarm of listAlarms">
-      <td>{{ alarm.dayOfWeek }}</td>
-      <td>{{ alarm.hours }}</td>
-      <td>{{ alarm.minutes }}</td>
+      <td>{{ alarm.properties().dayOfWeek }}</td>
+      <td>{{ alarm.properties().time.hours }}</td>
+      <td>{{ alarm.properties().time.minutes }}</td>
     </tr>
   </tbody>
 </table>
