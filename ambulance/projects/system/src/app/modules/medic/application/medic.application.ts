@@ -5,11 +5,6 @@ import { MedicInputs } from '../domain/inputs/input-medic.type';
 import { MedicRepository } from '../domain/repositories/medic.repository';
 
 export class MedicApplication {
-  /* repository: MedicRepository
-
-    constructor(repository: MedicRepository){
-        this.repository = repository;
-    } */
   constructor(private readonly repository: MedicRepository) {}
 
   async createMedic(
