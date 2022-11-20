@@ -1,5 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import { HandleException, IProduct, Logger, NewTokenMyLogger } from 'projects/system/src/app/app.module';
+=======
+import { HandleException, IProduct, Logger, NewTokenMyLogger, tokenLogger } from 'projects/system/src/app/app.module';
+>>>>>>> master
 
 import { OtherTokenMyLogger, TokenMyLogger } from '../../../../../app.module';
 
@@ -23,9 +27,17 @@ export class ListComponent implements OnInit {
     @Inject('MY_DATA2') private readonly data2: string,
     @Inject('MY_SERVICE') private readonly service: IProduct,
     @Inject(NewTokenMyLogger) private readonly logger4: Logger,
+<<<<<<< HEAD
     @Inject(OtherTokenMyLogger) private readonly instance: any
   ) {
     console.log('instance: ', instance);
+=======
+    @Inject(OtherTokenMyLogger) private readonly instance: any,
+    @Inject(tokenLogger) private readonly logger5: Logger
+  ) {
+    logger5.info('hola mundo');
+    //console.log('instance: ', instance);
+>>>>>>> master
     //logger4.info('Using useExisting');
     //console.log(service.getAll());
     /* logger3.info('ListComponent');

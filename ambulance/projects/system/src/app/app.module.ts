@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { InjectionToken, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -20,6 +20,8 @@ export class TokenMyLogger {}
 export class NewTokenMyLogger {}
 export class OtherTokenMyLogger {}
 
+export const tokenLogger = new InjectionToken('MyLog');
+
 export interface IProduct {
   getAll(): string[];
 }
@@ -40,6 +42,7 @@ export class FakeProductService implements IProduct {
   declarations: [AppComponent],
   imports: [BrowserModule, MedicModule],
   providers: [
+    { provide: tokenLogger, useClass: Logger },
     { provide: 'IsFake', useValue: false },
     {
       provide: 'MY_SERVICE',
