@@ -3,6 +3,7 @@ import { Component, OnChanges, OnInit } from '@angular/core';
 import { MedicApplication } from '../../../application/medic.application';
 import { MedicRepository } from '../../../domain/repositories/medic.repository';
 import { MedicInfrastructure } from '../../../infrastructure/medic.infrastructure';
+import { MedicService } from '../../../services/medic.service';
 
 @Component({
   selector: 'amb-form',
@@ -10,7 +11,9 @@ import { MedicInfrastructure } from '../../../infrastructure/medic.infrastructur
   styleUrls: ['./form.component.css'],
 })
 export class FormComponent implements OnInit, OnChanges {
-  constructor() {}
+  numberGenerated = 0;
+
+  constructor(private readonly medicService: MedicService) {}
 
   ngOnChanges() {}
 
@@ -25,5 +28,10 @@ export class FormComponent implements OnInit, OnChanges {
       '999999999',
       'email@correo.com'
     );
+  }
+
+  generate() {
+    this.medicService.generateNumber();
+    this.numberGenerated = this.medicService.numberRandom;
   }
 }
