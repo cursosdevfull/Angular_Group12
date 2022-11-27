@@ -22,7 +22,10 @@
               "projects/system/src/favicon.ico",
               "projects/system/src/assets"
             ],
-            "styles": ["projects/system/src/styles.css"],
+            "styles": [
+              "projects/system/src/custom-theme.scss",
+              "projects/system/src/styles.css"
+            ],
             "scripts": []
           },
           "configurations": {
