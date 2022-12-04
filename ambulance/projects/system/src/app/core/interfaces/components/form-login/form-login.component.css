@@ -1,0 +1,13 @@
+.clickable {
+  cursor: pointer;
+}
+
+h1,
+h2 {
+  text-align: center;
+}
+
+:host {
+  display: block;
+  width: 80%;
+}

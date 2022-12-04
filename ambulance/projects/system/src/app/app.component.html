@@ -1,9 +1,12 @@
 <mat-sidenav-container>
-  <mat-sidenav [opened]="isMenuShow" mode="side" *ngIf="false">
+  <mat-sidenav [opened]="isMenuShow" mode="side" *ngIf="configLayout.header">
     Menú vertical
   </mat-sidenav>
   <mat-sidenav-content>
-    <amb-header (onToggleSidenav)="toggleMenu()" *ngIf="false"></amb-header>
+    <amb-header
+      (onToggleSidenav)="toggleMenu()"
+      *ngIf="configLayout.menu"
+    ></amb-header>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

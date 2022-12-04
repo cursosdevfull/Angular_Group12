@@ -1,0 +1,56 @@
+<form fxLayout="column" [formGroup]="group">
+  <h1>Sistema de Historias</h1>
+  <h2>Credenciales</h2>
+  <mat-form-field appearance="outline" color="primary">
+    <mat-label>Correo</mat-label>
+    <input type="text" matInput formControlName="email" required />
+    <mat-icon matSuffix color="primary">mail</mat-icon>
+    <mat-error *ngIf="group.get('email').hasError('required')">
+      El correo es requerido
+    </mat-error>
+    <mat-error *ngIf="group.get('email').hasError('pattern')">
+      El correo no es válido
+    </mat-error>
+    <mat-error *ngIf="group.get('email').hasError('invalidEmailDomain')">
+      Debe usar un correo corporativo
+    </mat-error>
+    <mat-hint>Debe usar el correo corporativo</mat-hint>
+  </mat-form-field>
+  <mat-form-field appearance="outline" color="primary">
+    <mat-label>Contraseña</mat-label>
+    <input
+      [type]="visibleInputPassword"
+      matInput
+      formControlName="password"
+      required
+    />
+
+    <mat-icon
+      matSuffix
+      (click)="passwordVisible()"
+      color="primary"
+      class="clickable"
+      >lock</mat-icon
+    >
+    <mat-error *ngIf="group.get('password').hasError('required')">
+      La contraseña es requerida
+    </mat-error>
+    <mat-error *ngIf="group.get('password').hasError('pattern')">
+      La contraseña no cumple con el patrón
+    </mat-error>
+  </mat-form-field>
+
+  <!--  <mat-form-field appearance="outline" color="primary">
+    <mat-label>Confirmación de contraseña</mat-label>
+    <input type="password" matInput formControlName="confirm" required />
+
+    <mat-error *ngIf="group.get('confirm').hasError('required')">
+      La confirmación de la contraseña es requerida
+    </mat-error>
+    <mat-error *ngIf="group.get('confirm').hasError('confirmNotMatch')">
+      La contraseña y su confirmación deben ser iguales
+    </mat-error>
+  </mat-form-field> -->
+
+  <button mat-raised-button color="primary" (click)="login()">Ingresar</button>
+</form>
