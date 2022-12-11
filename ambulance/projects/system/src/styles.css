@@ -8,3 +8,15 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.heightMaxPerfectScrollBar {
+  height: 90%;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.footer {
+  padding: 10px 0;
+}

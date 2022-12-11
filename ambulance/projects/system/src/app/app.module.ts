@@ -1,5 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { MatPaginatorIntl } from '@angular/material/paginator';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
@@ -9,6 +10,7 @@ import { LAYOUT_CONSTANTS } from './config/constants/layout.constant';
 import { LayoutModule } from './config/modules/layout.module';
 import { CoreModule } from './core/core.module';
 import { LoginComponent } from './core/interfaces/login/login.component';
+import { Paginator } from './shared/classes/paginator';
 import { SharedModule } from './shared/shared.module';
 
 const routes: Routes = [
@@ -54,5 +56,6 @@ const routes: Routes = [
     LayoutModule.forRoot(LAYOUT_CONSTANTS),
   ],
   bootstrap: [AppComponent],
+  providers: [{ provide: MatPaginatorIntl, useClass: Paginator }],
 })
 export class AppModule {}
