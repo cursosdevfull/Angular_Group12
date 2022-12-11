@@ -11,6 +11,7 @@ import { LayoutService } from './config/services/layout.service';
 export class AppComponent {
   isMenuShow: boolean = true;
   configLayout: ILayout;
+  fecha: Date = new Date();
 
   toggleMenu(): void {
     this.isMenuShow = !this.isMenuShow;

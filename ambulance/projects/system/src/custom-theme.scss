@@ -34,8 +34,8 @@ $mat-my-orange: (
   ),
 );
 
-$system-primary: mat.define-palette(mat.$indigo-palette);
-//$system-primary: mat.define-palette($mat-my-orange);
+//$system-primary: mat.define-palette(mat.$indigo-palette);
+$system-primary: mat.define-palette($mat-my-orange);
 $system-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 $system-warn: mat.define-palette(mat.$red-palette);
 

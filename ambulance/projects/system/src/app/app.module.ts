@@ -9,7 +9,6 @@ import { LAYOUT_CONSTANTS } from './config/constants/layout.constant';
 import { LayoutModule } from './config/modules/layout.module';
 import { CoreModule } from './core/core.module';
 import { LoginComponent } from './core/interfaces/login/login.component';
-import { MedicModule } from './modules/medic/medic.module';
 import { SharedModule } from './shared/shared.module';
 
 const routes: Routes = [
@@ -19,13 +18,34 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/driver/driver.module').then((m) => m.DriverModule),
   },
+  {
+    path: 'medic',
+    loadChildren: () =>
+      import('./modules/medic/medic.module').then((m) => m.MedicModule),
+  },
+  {
+    path: 'history',
+    loadChildren: () =>
+      import('./modules/history/history.module').then((m) => m.HistoryModule),
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./modules/dashboard/dashboard.module').then(
+        (m) => m.DashboardModule
+      ),
+  },
+  {
+    path: 'user',
+    loadChildren: () =>
+      import('./modules/user/user.module').then((m) => m.UserModule),
+  },
 ];
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    MedicModule,
     HttpClientModule,
     BrowserAnimationsModule,
     SharedModule,
