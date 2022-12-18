@@ -1,0 +1,22 @@
+<amb-title title="{{ title }}" [iconName]="iconName"> </amb-title>
+<amb-container>
+    <form mat-dialog-content fxLayout="column" [formGroup]="group">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput type="text" formControlName="name" required />
+          <mat-error>El nombre es obligatorio</mat-error>
+        </mat-form-field>
+        <div fxLayout fxLayoutAlign="end" fxLayoutGap="20px">
+          <button
+            mat-raised-button
+            color="primary"
+            type="button"
+            [disabled]="group.invalid"
+            (click)="save()"
+          >
+            Save
+          </button>
+          <button mat-button mat-dialog-close type="button">Cancel</button>
+        </div>
+      </form>
+</amb-container>
