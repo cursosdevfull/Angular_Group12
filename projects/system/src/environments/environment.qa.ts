@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  pageSize: 40,
+  pageSize: 20,
+  apiPath: 'https://api-cursoangular.cursos-dev.com',
 };
 
 /*

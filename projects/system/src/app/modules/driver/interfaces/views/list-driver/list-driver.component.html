@@ -32,7 +32,7 @@
             mat-icon-button
             color="accent"
             matTooltip="DELETE"
-            (click)="delete()"
+            (click)="delete(row.id)"
           >
             <mat-icon>delete</mat-icon>
           </button>
@@ -46,7 +46,7 @@
       Exportar data
     </button>
     <amb-paginator
-      [length]="dataSourceOriginal.length"
+      [length]="totalRecords"
       [pageSize]="pageSize"
       [pageIndex]="0"
       (onChangePage)="changePage($event)"

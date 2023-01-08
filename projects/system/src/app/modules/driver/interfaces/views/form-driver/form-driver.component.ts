@@ -23,7 +23,7 @@ export class FormDriverComponent implements OnInit {
   loadForm() {
     this.group = new FormGroup({
       id: new FormControl(this.data?.id),
-      name: new FormControl(this.data?.name, Validators.required),
+      nombre: new FormControl(this.data?.nombre, Validators.required),
     });
   }
 

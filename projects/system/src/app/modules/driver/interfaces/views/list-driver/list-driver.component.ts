@@ -6,7 +6,10 @@ import { MetaData } from 'projects/system/src/app/shared/interfaces/meta-data.in
 import { ExportService } from 'projects/system/src/app/shared/service/export.service';
 import { fromEvent } from 'rxjs';
 
+import { ResultPage } from '../../../../../core/domain/base.interface';
 import { UtilsService } from '../../../../../shared/service/utils.service';
+import { DriverApplication } from '../../../application/driver.application';
+import { Driver } from '../../../domain/driver';
 import { FormDriverComponent } from '../form-driver/form-driver.component';
 
 @Component({
@@ -22,23 +25,9 @@ export class ListDriverComponent extends BaseComponent implements OnInit {
 
   metaData: MetaData[] = [
     { field: 'id', title: 'ID' },
-    { field: 'name', title: 'Nombre' },
-    { field: 'age', title: 'Edad' },
+    { field: 'nombre', title: 'Nombre' },
   ];
-  dataSourceOriginal = [
-    { id: 1, name: 'test', age: 20 },
-    { id: 2, name: 'test2', age: 40 },
-    { id: 3, name: 'test', age: 20 },
-    { id: 4, name: 'test2', age: 40 },
-    { id: 5, name: 'test', age: 20 },
-    { id: 6, name: 'test2', age: 40 },
-    { id: 7, name: 'test', age: 20 },
-    { id: 8, name: 'test2', age: 40 },
-    { id: 9, name: 'test', age: 20 },
-    { id: 10, name: 'test2', age: 40 },
-    { id: 11, name: 'test', age: 20 },
-    { id: 12, name: 'test2', age: 40 },
-  ];
+  dataSourceOriginal = [];
 
   dataSource = [];
 
@@ -46,7 +35,8 @@ export class ListDriverComponent extends BaseComponent implements OnInit {
     private layoutService: LayoutService,
     private exportService: ExportService,
     private utilsService: UtilsService,
-    private router: Router
+    private router: Router,
+    private readonly driverApplication: DriverApplication
   ) {
     super();
     this.layoutService.configuration = { header: true, menu: true };
@@ -64,10 +54,17 @@ export class ListDriverComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {}
 
   changePage(pageIndex: number) {
-    this.dataSource = this.dataSourceOriginal.slice(
+    this.driverApplication.page(pageIndex).subscribe({
+      next: (data: ResultPage<Driver>) => {
+        this.dataSource = data.records;
+        this.totalRecords = data.totalRecords;
+        this.currentPage = pageIndex;
+      },
+    });
+    /*     this.dataSource = this.dataSourceOriginal.slice(
       pageIndex * this.pageSize,
       pageIndex * this.pageSize + this.pageSize
-    );
+    ); */
   }
 
   search(event: KeyboardEvent) {
@@ -78,37 +75,55 @@ export class ListDriverComponent extends BaseComponent implements OnInit {
   }
 
   showOptionsExport() {
-    const metaDatas: MetaData[] = [
-      { field: 'id', title: 'ID' },
-      { field: 'name', title: 'Nombre' },
-      { field: 'age', title: 'Edad' },
-    ];
-    this.exportService.showExport(
-      this.dataSourceOriginal,
-      metaDatas,
-      'drivers',
-      'drivers'
-    );
+    this.driverApplication.list().subscribe({
+      next: (data: Driver[]) => {
+        const metaDatas: MetaData[] = [
+          { field: 'id', title: 'ID' },
+          { field: 'nombre', title: 'Nombre' },
+        ];
+        this.exportService.showExport(data, metaDatas, 'drivers', 'drivers');
+      },
+    });
   }
 
-  delete() {
+  delete(id: number) {
     this.utilsService.confirm('¿Está seguro?').subscribe((result) => {
       if (result) {
-        console.log('confirmado');
+        this.driverApplication.delete(id).subscribe({
+          next: () => {
+            this.changePage(this.currentPage);
+            this.utilsService.showNotification('Driver eliminado');
+          },
+        });
       }
     });
   }
 
-  openForm(data: any = null) {
+  openForm(data: Driver = null) {
     this.utilsService
       .openForm(FormDriverComponent, 'modal-driver', data)
       .subscribe((result) => {
         if (!result) return;
 
-        if (result.id) {
-          console.log('edit', result);
+        const id = result.id;
+        delete result.id;
+
+        if (id) {
+          this.driverApplication.update(id, result).subscribe({
+            next: () => {
+              this.changePage(this.currentPage);
+              this.utilsService.showNotification(
+                'Información de driver actualizada'
+              );
+            },
+          });
         } else {
-          console.log('new', result);
+          this.driverApplication.insert(result).subscribe({
+            next: () => {
+              this.changePage(this.currentPage);
+              this.utilsService.showNotification('Driver creado');
+            },
+          });
         }
       });
   }
