@@ -1,0 +1,62 @@
+<mat-toolbar fxLayout fxLayoutAlign="space-between center">
+  <h3>{{ title }}</h3>
+  <button mat-icon-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+<form mat-dialog-content fxLayout="column" [formGroup]="group">
+  <div fxLayout fxLayoutGap="20px">
+    <div fxLayout="column" fxFlex="1 1 33%">
+      <amb-photo
+        formControlName="foto"
+        [photoByDefault]="photoToShow"
+      ></amb-photo>
+    </div>
+    <div fxLayout="column" fxFlex="1 1 33%">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input type="text" formControlName="nombre" matInput required />
+        <mat-error>El nombre es obligatorio</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Segundo nombre</mat-label>
+        <input type="text" formControlName="segundo_nombre" matInput required />
+        <mat-error>El segundo nombre es obligatorio</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Apellido</mat-label>
+        <input type="text" formControlName="apellido" matInput required />
+        <mat-error>El apellido es obligatorio</mat-error>
+      </mat-form-field>
+    </div>
+    <div fxLayout="column" fxFlex="1 1 33%">
+      <mat-form-field appearance="outline">
+        <mat-label>CMP</mat-label>
+        <input type="text" formControlName="cmp" matInput required />
+        <mat-error>El CMP es obligatorio</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>DNI</mat-label>
+        <input type="text" formControlName="dni" matInput required />
+        <mat-error>El DNI es obligatorio</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Correo</mat-label>
+        <input type="text" formControlName="correo" matInput required />
+        <mat-error>El correo es obligatorio</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div fxLayout fxLayoutAlign="end" fxLayoutGap="20px">
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      [disabled]="group.invalid"
+      (click)="save()"
+    >
+      Save
+    </button>
+    <button mat-button mat-dialog-close type="button">Cancel</button>
+  </div>
+</form>

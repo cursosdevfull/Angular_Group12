@@ -18,6 +18,8 @@ import { AuthInfrastructure } from './modules/auth/infrastructure/auth.infrastru
 import { StorageInfrastructure } from './modules/auth/infrastructure/storage.infrastructure';
 import { DriverApplication } from './modules/driver/application/driver.application';
 import { DriverInfrastructure } from './modules/driver/infrastructure/driver.infrastructure';
+import { MedicApplication } from './modules/medic/application/medic.application';
+import { MedicInfrastructure } from './modules/medic/infrastructure/medic.infrastructure';
 import { Paginator } from './shared/classes/paginator';
 import { AuthenticationGuard } from './shared/guards/authentication.guard';
 import { SharedModule } from './shared/shared.module';
@@ -62,11 +64,17 @@ const routes: Routes = [
   },
 ];
 
-const application = [AuthApplication, StorageApplication, DriverApplication];
+const application = [
+  AuthApplication,
+  StorageApplication,
+  DriverApplication,
+  MedicApplication,
+];
 const infrastructure = [
   AuthInfrastructure,
   StorageInfrastructure,
   DriverInfrastructure,
+  MedicInfrastructure,
 ];
 const interceptors = [
   { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

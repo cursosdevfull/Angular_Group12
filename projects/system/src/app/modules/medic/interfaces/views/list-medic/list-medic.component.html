@@ -1,7 +1,7 @@
 <amb-title title="{{ title }}" [iconName]="iconName">
   <button mat-raised-button color="primary" (click)="openForm()">
     <mat-icon>add</mat-icon>
-    <span>ADD DRIVER</span>
+    <span>ADD MEDIC</span>
   </button>
 </amb-title>
 
@@ -23,7 +23,7 @@
             mat-icon-button
             color="accent"
             matTooltip="DELETE"
-            (click)="delete(row.id)"
+            (click)="delete(row.id, row.nombre + ' ' + row.apellido)"
           >
             <mat-icon>delete</mat-icon>
           </button>

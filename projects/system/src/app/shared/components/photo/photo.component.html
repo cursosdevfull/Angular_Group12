@@ -1,0 +1,38 @@
+<div
+  class="contenedor"
+  upload
+  [ngClass]="{ hover: statusHover }"
+  (onHover)="statusHover = $event"
+  (onFileDropped)="onFileDropped($event)"
+  #photo
+  (click)="loadImage()"
+  *ngIf="!isUsingWebCam"
+></div>
+<webcam
+  [width]="231"
+  [height]="207"
+  mirrorImage="never"
+  *ngIf="isUsingWebCam"
+  [trigger]="triggerAsObservable()"
+  (imageCapture)="onImageCapture($event)"
+></webcam>
+<div>
+  <mat-slide-toggle
+    color="primary"
+    (change)="changeOriginPhoto($event)"
+    [checked]="isUsingWebCam"
+  >
+    Usar Webcam</mat-slide-toggle
+  >
+  <button
+    *ngIf="isUsingWebCam"
+    mat-icon-button
+    color="primary"
+    type="button"
+    (click)="takePhoto()"
+  >
+    <mat-icon>add_a_photo</mat-icon>
+  </button>
+</div>
+
+<input type="file" #file (change)="selectImage($event)" />

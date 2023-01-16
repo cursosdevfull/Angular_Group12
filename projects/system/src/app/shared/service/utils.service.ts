@@ -2,7 +2,7 @@ import { ComponentType } from '@angular/cdk/portal';
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import * as XLSX from 'xlsx';
 
 import { ConfirmComponent } from '../components/confirm/confirm.component';
@@ -12,18 +12,20 @@ import { MetaData } from '../interfaces/meta-data.interface';
   providedIn: 'root',
 })
 export class UtilsService {
+  loading: Subject<boolean> = new Subject<boolean>();
+
   constructor(
     private readonly dialog: MatDialog,
     private readonly notifier: MatSnackBar
   ) {}
 
-  confirm(message: string = ''): Observable<any> {
+  confirm(message: string[] = []): Observable<any> {
     const reference: MatDialogRef<ConfirmComponent> = this.dialog.open(
       ConfirmComponent,
       { disableClose: true, width: '400px' }
     );
 
-    if (message.trim()) reference.componentInstance.message = message;
+    if (message.length > 0) reference.componentInstance.messages = message;
 
     return reference.afterClosed();
   }

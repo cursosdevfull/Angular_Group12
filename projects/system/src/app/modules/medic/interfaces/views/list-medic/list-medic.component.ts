@@ -6,51 +6,53 @@ import { ExportService } from 'projects/system/src/app/shared/service/export.ser
 
 import { ExportOptions, Modal } from '../../../../../shared/classes/base-component';
 import { UtilsService } from '../../../../../shared/service/utils.service';
-import { DriverApplication } from '../../../application/driver.application';
-import { Driver } from '../../../domain/driver';
-import { DriverRepository } from '../../../domain/driver.repository';
-import { FormDriverComponent } from '../form-driver/form-driver.component';
+import { MedicApplication } from '../../../application/medic.application';
+import { Medic } from '../../../domain/medic';
+import { MedicRepository } from '../../../domain/medic.repository';
+import { FormMedicComponent } from '../form-medic/form-medic.component';
 
 @Component({
-  selector: 'amb-list-driver',
-  templateUrl: './list-driver.component.html',
-  styleUrls: ['./list-driver.component.css'],
+  selector: 'amb-list-medic',
+  templateUrl: './list-medic.component.html',
+  styleUrls: ['./list-medic.component.css'],
 })
-export class ListDriverComponent extends BaseComponent<
-  Driver,
-  DriverRepository
-> {
-  title = 'Drivers';
+export class ListMedicComponent extends BaseComponent<Medic, MedicRepository> {
+  title = 'Medics';
   iconName = 'directions_bus';
 
   metaData: MetaData[] = [
     { field: 'id', title: 'ID' },
     { field: 'nombre', title: 'Nombre' },
+    { field: 'segundo_nombre', title: 'Segundo Nombre' },
+    { field: 'apellido', title: 'Apellido Paterno' },
+    { field: 'cmp', title: 'CMP' },
+    { field: 'correo', title: 'Correo' },
+    { field: 'dni', title: 'DNI' },
   ];
 
   exportOptions: ExportOptions = {
-    name: 'drivers',
-    filename: 'drivers',
+    name: 'medics',
+    filename: 'medics',
   };
 
   messages: Messages = {
     confirm: '¿Está seguro de eliminar?',
-    insert: 'Piloto insertado',
-    update: 'Piloto actualizado',
-    delete: 'Piloto eliminado',
+    insert: 'Médico insertado',
+    update: 'Médico actualizado',
+    delete: 'Médico eliminado',
   };
 
   modal: Modal = {
-    component: FormDriverComponent,
-    class: 'modal-driver',
+    component: FormMedicComponent,
+    class: 'modal-medic',
   };
 
   constructor(
     protected override layoutService: LayoutService,
     protected override exportService: ExportService,
     protected override utilsService: UtilsService,
-    protected driverApplication: DriverApplication
+    protected medicApplication: MedicApplication
   ) {
-    super(layoutService, utilsService, exportService, driverApplication);
+    super(layoutService, utilsService, exportService, medicApplication);
   }
 }

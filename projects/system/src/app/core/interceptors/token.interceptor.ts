@@ -1,6 +1,6 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
-import { catchError, mergeMap, Observable, retry, throwError } from 'rxjs';
+import { catchError, mergeMap, Observable, retry, tap, throwError } from 'rxjs';
 
 import { AuthApplication } from '../../modules/auth/application/auth.application';
 import { StorageApplication } from '../../modules/auth/application/storage.application';
@@ -26,6 +26,7 @@ export class TokenInterceptor implements HttpInterceptor {
     });
 
     return next.handle(clonedRequest).pipe(
+      tap(() => this.utilsService.loading.next(true)),
       catchError((error: HttpErrorResponse) => {
         let errorMessage = '';
 
@@ -36,8 +37,10 @@ export class TokenInterceptor implements HttpInterceptor {
           return this.handlerErrorBackend(error, req, next);
         }
 
+        this.utilsService.loading.next(false);
         return throwError(() => new Error(errorMessage));
-      })
+      }),
+      tap(() => this.utilsService.loading.next(false))
     );
   }
 
@@ -68,6 +71,7 @@ export class TokenInterceptor implements HttpInterceptor {
         })
       );
     } else if (error.status === 401) {
+      this.utilsService.loading.next(false);
       auth.logout();
     }
 

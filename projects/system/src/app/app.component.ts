@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
-import { environment } from '../environments/environment';
 import { ILayout } from './config/interfaces/layout.interface';
 import { LayoutService } from './config/services/layout.service';
+import { UtilsService } from './shared/service/utils.service';
 
 @Component({
   selector: 'amb-root',
@@ -11,6 +11,7 @@ import { LayoutService } from './config/services/layout.service';
 })
 export class AppComponent {
   isMenuShow: boolean = true;
+  isLoading = false;
   configLayout: ILayout;
   fecha: Date = new Date();
 
@@ -18,11 +19,15 @@ export class AppComponent {
     this.isMenuShow = !this.isMenuShow;
   }
 
-  constructor(private layoutService: LayoutService) {
+  constructor(
+    private layoutService: LayoutService,
+    private readonly utilsService: UtilsService
+  ) {
     layoutService.configuration.subscribe((config: ILayout) => {
       this.configLayout = config;
     });
-
-    console.log(environment.pageSize);
+    utilsService.loading.subscribe((isLoading: boolean) => {
+      this.isLoading = isLoading;
+    });
   }
 }

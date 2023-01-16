@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./confirm.component.css'],
 })
 export class ConfirmComponent implements OnInit {
-  message = '¿Está seguro de eliminar el registro?';
+  //messages = '¿Está seguro de eliminar el registro?';
+  messages = ['¿Está seguro de eliminar el registro?']
 
   constructor() {}
 

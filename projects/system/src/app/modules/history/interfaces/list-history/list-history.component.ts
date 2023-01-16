@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { LayoutService } from 'projects/system/src/app/config/services/layout.service';
-import { BaseComponent } from 'projects/system/src/app/shared/classes/base-component';
 import { MetaData } from 'projects/system/src/app/shared/interfaces/meta-data.interface';
 
 @Component({
@@ -8,7 +7,7 @@ import { MetaData } from 'projects/system/src/app/shared/interfaces/meta-data.in
   templateUrl: './list-history.component.html',
   styleUrls: ['./list-history.component.css'],
 })
-export class ListHistoryComponent extends BaseComponent implements OnInit {
+export class ListHistoryComponent implements OnInit {
   title = 'Histories';
   iconName = 'medical_information';
 
@@ -34,18 +33,7 @@ export class ListHistoryComponent extends BaseComponent implements OnInit {
 
   dataSource = [];
 
-  constructor(private layoutService: LayoutService) {
-    super();
-    this.layoutService.configuration = { header: true, menu: true };
-    this.changePage(0);
-  }
+  constructor(private layoutService: LayoutService) {}
 
   ngOnInit(): void {}
-
-  changePage(pageIndex: number) {
-    this.dataSource = this.dataSourceOriginal.slice(
-      pageIndex * this.pageSize,
-      pageIndex * this.pageSize + this.pageSize
-    );
-  }
 }

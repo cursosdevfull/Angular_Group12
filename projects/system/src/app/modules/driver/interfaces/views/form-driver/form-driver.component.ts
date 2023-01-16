@@ -28,8 +28,11 @@ export class FormDriverComponent implements OnInit {
   }
 
   save() {
-    const record = this.group.value;
-    this.reference.close(record);
+    const values = this.group.value;
+    const recordId = values.id;
+    delete values.id;
+
+    this.reference.close({ id: recordId, data: values });
   }
 
   ngOnInit(): void {}

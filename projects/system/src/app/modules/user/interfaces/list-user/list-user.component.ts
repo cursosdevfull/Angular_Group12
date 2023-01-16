@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { LayoutService } from 'projects/system/src/app/config/services/layout.service';
-import { BaseComponent } from 'projects/system/src/app/shared/classes/base-component';
+import { Component } from '@angular/core';
+import { ExportOptions, Messages, Modal } from 'projects/system/src/app/shared/classes/base-component';
 import { MetaData } from 'projects/system/src/app/shared/interfaces/meta-data.interface';
 
 @Component({
@@ -8,44 +7,38 @@ import { MetaData } from 'projects/system/src/app/shared/interfaces/meta-data.in
   templateUrl: './list-user.component.html',
   styleUrls: ['./list-user.component.css'],
 })
-export class ListUserComponent extends BaseComponent implements OnInit {
+export class ListUserComponent {
   title = 'Users';
-  iconName = 'face';
+  iconName = 'faces';
 
   metaData: MetaData[] = [
     { field: 'id', title: 'ID' },
-    { field: 'name', title: 'Nombre' },
-    { field: 'age', title: 'Edad' },
-  ];
-  dataSourceOriginal = [
-    { id: 1, name: 'test', age: 20 },
-    { id: 2, name: 'test2', age: 40 },
-    { id: 3, name: 'test', age: 20 },
-    { id: 4, name: 'test2', age: 40 },
-    { id: 5, name: 'test', age: 20 },
-    { id: 6, name: 'test2', age: 40 },
-    { id: 7, name: 'test', age: 20 },
-    { id: 8, name: 'test2', age: 40 },
-    { id: 9, name: 'test', age: 20 },
-    { id: 10, name: 'test2', age: 40 },
-    { id: 11, name: 'test', age: 20 },
-    { id: 12, name: 'test2', age: 40 },
+    { field: 'nombre', title: 'Nombre' },
   ];
 
-  dataSource = [];
+  exportOptions: ExportOptions = {
+    name: 'users',
+    filename: 'users',
+  };
 
-  constructor(private layoutService: LayoutService) {
-    super();
-    this.layoutService.configuration = { header: true, menu: true };
-    this.changePage(0);
-  }
+  messages: Messages = {
+    confirm: '¿Está seguro de eliminar?',
+    insert: 'Usuario insertado',
+    update: 'Usuario actualizado',
+    delete: 'Usuario eliminado',
+  };
 
-  ngOnInit(): void {}
+  modal: Modal = {
+    component: null,
+    class: 'modal-user',
+  };
 
-  changePage(pageIndex: number) {
-    this.dataSource = this.dataSourceOriginal.slice(
-      pageIndex * this.pageSize,
-      pageIndex * this.pageSize + this.pageSize
-    );
-  }
+  /* constructor(
+    protected override layoutService: LayoutService,
+    protected override exportService: ExportService,
+    protected override utilsService: UtilsService,
+    protected userApplication: UserApplication
+  ) {
+    super(layoutService, utilsService, exportService, userApplication);
+  } */
 }
