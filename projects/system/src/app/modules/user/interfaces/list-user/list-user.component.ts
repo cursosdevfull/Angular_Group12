@@ -1,19 +1,34 @@
 import { Component } from '@angular/core';
-import { ExportOptions, Messages, Modal } from 'projects/system/src/app/shared/classes/base-component';
+import { LayoutService } from 'projects/system/src/app/config/services/layout.service';
+import { BaseComponent, ExportOptions, Messages, Modal } from 'projects/system/src/app/shared/classes/base-component';
 import { MetaData } from 'projects/system/src/app/shared/interfaces/meta-data.interface';
+import { ExportService } from 'projects/system/src/app/shared/service/export.service';
+import { UtilsService } from 'projects/system/src/app/shared/service/utils.service';
+
+import { UserApplication } from '../../application/user.application';
+import { User } from '../../domain/user';
+import { UserRepository } from '../../domain/user.repository';
+import { FormUserComponent } from '../form-user/form-user.component';
 
 @Component({
   selector: 'amb-list-user',
   templateUrl: './list-user.component.html',
   styleUrls: ['./list-user.component.css'],
 })
-export class ListUserComponent {
+export class ListUserComponent extends BaseComponent<User, UserRepository> {
   title = 'Users';
   iconName = 'faces';
 
   metaData: MetaData[] = [
     { field: 'id', title: 'ID' },
     { field: 'nombre', title: 'Nombre' },
+    { field: 'correo', title: 'Correo' },
+  ];
+
+  metaDataExport: MetaData[] = [
+    { field: 'id', title: 'ID' },
+    { field: 'nombre', title: 'Nombre' },
+    { field: 'correo', title: 'Correo' },
   ];
 
   exportOptions: ExportOptions = {
@@ -29,16 +44,16 @@ export class ListUserComponent {
   };
 
   modal: Modal = {
-    component: null,
+    component: FormUserComponent,
     class: 'modal-user',
   };
 
-  /* constructor(
+  constructor(
     protected override layoutService: LayoutService,
     protected override exportService: ExportService,
     protected override utilsService: UtilsService,
     protected userApplication: UserApplication
   ) {
     super(layoutService, utilsService, exportService, userApplication);
-  } */
+  }
 }

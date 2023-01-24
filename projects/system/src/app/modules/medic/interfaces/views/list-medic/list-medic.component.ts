@@ -27,6 +27,14 @@ export class ListMedicComponent extends BaseComponent<Medic, MedicRepository> {
     { field: 'apellido', title: 'Apellido Paterno' },
     { field: 'cmp', title: 'CMP' },
     { field: 'correo', title: 'Correo' },
+    //{ field: 'dni', title: 'DNI' },
+  ];
+
+  metaDataExport: MetaData[] = [
+    { field: 'id', title: 'ID' },
+    { field: 'nombre', title: 'Nombre' },
+    { field: 'segundo_nombre', title: 'Segundo Nombre' },
+    { field: 'apellido', title: 'Apellido Paterno' },
     { field: 'dni', title: 'DNI' },
   ];
 

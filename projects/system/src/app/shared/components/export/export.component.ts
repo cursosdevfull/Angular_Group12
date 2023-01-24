@@ -4,6 +4,8 @@ import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bott
 import { MetaData } from '../../interfaces/meta-data.interface';
 import { UtilsService } from '../../service/utils.service';
 
+export type ACTION_PDF = 'view' | 'download' | 'print';
+
 @Component({
   selector: 'amb-export',
   templateUrl: './export.component.html',
@@ -34,6 +36,18 @@ export class ExportComponent implements OnInit {
       this.metaDatas,
       this.filename,
       this.elementName
+    );
+
+    this.reference.dismiss();
+  }
+
+  exportToPDF(option: ACTION_PDF) {
+    this.utilsService.exportToPDF(
+      this.records,
+      this.metaDatas,
+      this.filename,
+      this.elementName,
+      option
     );
 
     this.reference.dismiss();

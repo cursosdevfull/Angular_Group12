@@ -20,4 +20,8 @@ export class StorageApplication {
   clear(): void {
     this.storage.clear();
   }
+
+  getFieldInToken(field: string): string | string[] {
+    return this.storage.getFieldInToken(field);
+  }
 }

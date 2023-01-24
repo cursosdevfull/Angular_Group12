@@ -28,6 +28,7 @@ export abstract class BaseComponent<Entity, Repository extends Base<Entity>> {
   abstract title: string;
   abstract iconName: string;
   abstract metaData: MetaData[];
+  abstract metaDataExport: MetaData[];
   abstract exportOptions: ExportOptions;
   abstract messages: Messages;
   abstract modal: Modal;
@@ -65,7 +66,7 @@ export abstract class BaseComponent<Entity, Repository extends Base<Entity>> {
       next: (data: Entity[]) => {
         this.exportService.showExport(
           data,
-          this.metaData,
+          this.metaDataExport,
           this.exportOptions.name,
           this.exportOptions.filename
         );

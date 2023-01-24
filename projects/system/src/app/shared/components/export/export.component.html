@@ -3,14 +3,20 @@
     <button mat-button (click)="exportToExcel()">Exportar a Excel</button>
   </mat-list-item>
   <mat-list-item>
-    <button mat-button>Exportar a PDF (visualización)</button>
+    <button mat-button (click)="exportToPDF('view')">
+      Exportar a PDF (visualización)
+    </button>
   </mat-list-item>
 
   <mat-list-item>
-    <button mat-button>Exportar a PDF (descarga)</button>
+    <button mat-button (click)="exportToPDF('download')">
+      Exportar a PDF (descarga)
+    </button>
   </mat-list-item>
 
   <mat-list-item>
-    <button mat-button>Exportar a PDF (imprimir)</button>
+    <button mat-button (click)="exportToPDF('print')">
+      Exportar a PDF (imprimir)
+    </button>
   </mat-list-item>
 </mat-nav-list>

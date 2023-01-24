@@ -1,5 +1,10 @@
 <amb-title title="{{ title }}" [iconName]="iconName">
-  <button mat-raised-button color="primary" (click)="openForm()">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="openForm()"
+    *rolesAllowed="'MEDIC,ADMIN'"
+  >
     <mat-icon>add</mat-icon>
     <span>ADD MEDIC</span>
   </button>
@@ -16,6 +21,7 @@
             color="primary"
             matTooltip="EDIT"
             (click)="openForm(row)"
+            *rolesAllowed="'MEDIC,ADMIN'"
           >
             <mat-icon>edit</mat-icon>
           </button>

@@ -16,10 +16,20 @@ import { StorageApplication } from './modules/auth/application/storage.applicati
 import { AuthModule } from './modules/auth/auth.module';
 import { AuthInfrastructure } from './modules/auth/infrastructure/auth.infrastructure';
 import { StorageInfrastructure } from './modules/auth/infrastructure/storage.infrastructure';
+import { InvoiceApplication } from './modules/billing/application/invoice.application';
+import { InvoiceInfrastructure } from './modules/billing/infrastructure/invoice.infrastructure';
+import { CovidApplication } from './modules/dashboard/application/covid.application';
+import { SocketApplication } from './modules/dashboard/application/socket.application';
+import { CovidInfrastructure } from './modules/dashboard/infrastructure/covid.infrastructure';
+import { SocketInfrastructure } from './modules/dashboard/infrastructure/socket.infrastructure';
 import { DriverApplication } from './modules/driver/application/driver.application';
 import { DriverInfrastructure } from './modules/driver/infrastructure/driver.infrastructure';
 import { MedicApplication } from './modules/medic/application/medic.application';
 import { MedicInfrastructure } from './modules/medic/infrastructure/medic.infrastructure';
+import { RoleApplication } from './modules/role/application/role.application';
+import { RoleInfrastructure } from './modules/role/infrastructure/role.infrastructure';
+import { UserApplication } from './modules/user/application/user.application';
+import { UserInfrastructure } from './modules/user/infrastructure/user.infrastructure';
 import { Paginator } from './shared/classes/paginator';
 import { AuthenticationGuard } from './shared/guards/authentication.guard';
 import { SharedModule } from './shared/shared.module';
@@ -69,12 +79,22 @@ const application = [
   StorageApplication,
   DriverApplication,
   MedicApplication,
+  UserApplication,
+  RoleApplication,
+  InvoiceApplication,
+  CovidApplication,
+  SocketApplication,
 ];
 const infrastructure = [
   AuthInfrastructure,
   StorageInfrastructure,
   DriverInfrastructure,
   MedicInfrastructure,
+  UserInfrastructure,
+  RoleInfrastructure,
+  InvoiceInfrastructure,
+  CovidInfrastructure,
+  SocketInfrastructure,
 ];
 const interceptors = [
   { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

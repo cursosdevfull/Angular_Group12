@@ -1,6 +1,6 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable, Injector } from '@angular/core';
-import { catchError, mergeMap, Observable, retry, tap, throwError } from 'rxjs';
+import { catchError, mergeMap, Observable, retry, tap, throwError, timeout } from 'rxjs';
 
 import { AuthApplication } from '../../modules/auth/application/auth.application';
 import { StorageApplication } from '../../modules/auth/application/storage.application';
@@ -27,6 +27,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
     return next.handle(clonedRequest).pipe(
       tap(() => this.utilsService.loading.next(true)),
+      timeout(3000),
       catchError((error: HttpErrorResponse) => {
         let errorMessage = '';
 
@@ -75,8 +76,14 @@ export class TokenInterceptor implements HttpInterceptor {
       auth.logout();
     }
 
+    const messageError =
+      error.name.toString() === 'TimeoutError'
+        ? 'Tiempo de espera agotado. La petición no pudo ser procesada.'
+        : error.error.message;
+
     this.utilsService.showNotification(
-      'Ocurrió un error inesperado. Por favor intente más tarde.',
+      //'Ocurrió un error inesperado. Por favor intente más tarde.',
+      messageError,
       4000
     );
 

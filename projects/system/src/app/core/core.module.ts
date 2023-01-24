@@ -11,6 +11,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 
+import { SharedModule } from '../shared/shared.module';
 import { FormLoginComponent } from './interfaces/components/form-login/form-login.component';
 import { HeaderComponent } from './interfaces/header/header.component';
 import { LoginComponent } from './interfaces/login/login.component';
@@ -35,6 +36,7 @@ import { MenuComponent } from './interfaces/menu/menu.component';
     ReactiveFormsModule,
     MatListModule,
     RouterModule,
+    SharedModule,
   ],
   exports: [HeaderComponent, MenuComponent],
 })

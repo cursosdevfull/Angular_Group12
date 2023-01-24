@@ -28,6 +28,11 @@ export class ListDriverComponent extends BaseComponent<
     { field: 'nombre', title: 'Nombre' },
   ];
 
+  metaDataExport: MetaData[] = [
+    { field: 'id', title: 'ID' },
+    { field: 'nombre', title: 'Nombre' },
+  ];
+
   exportOptions: ExportOptions = {
     name: 'drivers',
     filename: 'drivers',
