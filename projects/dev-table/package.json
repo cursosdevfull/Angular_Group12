@@ -1,0 +1,13 @@
+{
+  "name": "dev-table",
+  "version": "6.0.0",
+  "peerDependencies": {
+    "@angular/common": "^14.2.0",
+    "@angular/core": "^14.2.0",
+    "@angular/material": "^14.2.7",
+    "@angular/flex-layout": "^14.0.0-beta.41"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}
